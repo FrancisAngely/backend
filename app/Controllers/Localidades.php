@@ -22,6 +22,19 @@ class Localidades extends BaseController
     
     }
 
+    public function datatable()
+    {
+        $model = new Localidad();
+
+        return $this->getResponse(
+            [
+                'message' => 'Localidades retrieved successfully',
+                'data' => $model->findAll()
+            ]
+        );
+    
+    }
+
     /**
     * Create a new Localidad
     */
