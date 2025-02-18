@@ -5,17 +5,20 @@ namespace App\Models;
 use CodeIgniter\Model;
 use Exception;
 
-class Classes extends Model
+class Modulos extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'classes';
+    protected $table                = 'modulos';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = ['code', 'status', 'name', 'maximum_students', 'description'];
+    protected $allowedFields        = 
+        [
+            "modulo",
+        ];
 
     // Dates
     protected $useTimestamps        = false;
@@ -32,15 +35,14 @@ class Classes extends Model
 
     public function findClassById(string $id)
     {
-        $class = $this
+        $modulos = $this
             ->asArray()
             ->where(['id' => $id])
             ->first();
 
-        if (!$class) 
+        if (!$modulos) 
             throw new Exception('Class does not exist for specified ID');
 
-        return $class;
+        return $modulos;
     }
-
 }

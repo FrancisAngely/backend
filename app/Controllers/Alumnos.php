@@ -3,45 +3,32 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\Localidad;
+use App\Models\Alumno;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
-class Localidades extends BaseController
+class Alumnos extends BaseController
 {
     public function index()
     {
-        $model = new Localidad();
+        $model = new Alumno();
 
         return $this->getResponse(
             [
-                'message' => 'Localidades retrieved successfully',
-                'localidades' => $model->findAll()
+                'message' => 'Students retrieved successfully',
+                'alumnos' => $model->findAll()
             ]
         );
-    
-    }
-
-    public function datatable()
-    {
-        $model = new Localidad();
-
-        return $this->getResponse(
-            [
-                'message' => 'Localidades retrieved successfully',
-                'data' => $model->findAll()
-            ]
-        );
-    
     }
 
     /**
-    * Create a new Localidad
+    * Create a new Student
     */
    public function store()
    {
         $rules = [
-            'name' => 'required',
+            'nombre' => 'required',
+            'apellidos' => 'required',
         ];
         $input = $this->getRequestInput($this->request);
 
@@ -53,36 +40,36 @@ class Localidades extends BaseController
             );
         }
 
-        $model = new Localidad();
+        $model = new Alumno();
         $model->save($input);
-        $hero = $model->where('id', $model->getInsertID())->first();
+
         return $this->getResponse(
             [
-                'message' => 'Localidad added successfully',
-                'hero' => $hero
+                'message' => 'Student added successfully',
+                'alumno' => $input
             ]
         );
    }
 
     /**
-    * Get a single class by CODE
+    * Get a single student by ID
     */
     public function show($id)
     {
         try {
-            $model = new Localidad();
-            $hero = $model->findLocalidadById($id);
+            $model = new Alumno();
+            $student = $model->findStudentById($id);
  
             return $this->getResponse(
                 [
-                    'message' => 'Localidad retrieved successfully',
-                    'hero' => $hero
+                    'message' => 'Student retrieved successfully',
+                    'student' => $student
                 ]
             );
         } catch (Exception $e) {
             return $this->getResponse(
                 [
-                    'message' => 'Could not find hero for specified ID',
+                    'message' => 'Could not find student for specified ID',
                     'error' => $e->getMessage()
                 ],
                 ResponseInterface::HTTP_NOT_FOUND
@@ -90,22 +77,22 @@ class Localidades extends BaseController
         }
     }
     /**
-    * Update a Localidad
+    * Update a Student
     */
-  public function update($id)
+   public function update($id)
    {
        try {
-            $model = new Localidad();
-            $model->findLocalidadById($id);
+            $model = new Alumno();
+            $model->findStudentById($id);
 
             $input = $this->getRequestInput($this->request);
             $model->update($id, $input);
-            $hero = $model->findLocalidadById($id);
+            $student = $model->findStudentById($id);
 
             return $this->getResponse(
                 [
-                    'message' => 'Localidad updated successfully',
-                    'hero' => $hero
+                    'message' => 'Student updated successfully',
+                    'student' => $student
                 ]
             );
        } catch (Exception $exception) {
@@ -119,19 +106,19 @@ class Localidades extends BaseController
    }
 
    /**
-    * Delete a Class
+    * Delete a Student
     */
     public function destroy($id)
     {
          try {
-             $model = new Localidad();
-             $hero = $model->findLocalidadById($id);
-             $model->delete($hero);
+             $model = new Alumno();
+             $student = $model->findStudentById($id);
+             $model->delete($student);
  
              return $this
                  ->getResponse(
                      [
-                         'message' => 'Localidad deleted successfully',
+                         'message' => 'Student deleted successfully',
                      ]
                  );
          } catch (Exception $exception) {

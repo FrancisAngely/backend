@@ -38,6 +38,8 @@ class Usuarios extends BaseController
         $rules = [
             'nombre' => 'required',
             'apellido' => 'required',
+            'email' => 'required|valid_email',
+            'password' => 'required'
         ];
         $input = $this->getRequestInput($this->request);
 

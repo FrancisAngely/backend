@@ -3,24 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\Classes as ClassModel;
-use App\Models\Student;
+use App\Models\Notas as NotasModel;
+use App\Models\Alumno as Student;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
-class Classes extends BaseController
+class Notas extends BaseController
 {
-    /*
-    * Get all Classes
-    * @return Response
-    */
    public function index()
    {
-        $model = new ClassModel();
+        $model = new NotasModel();
 
         return $this->getResponse(
             [
-                'message' => 'Classes retrieved successfully',
+                'message' => 'Notas retrieved successfully',
                 'classes' => $model->findAll()
             ]
         );
@@ -32,10 +28,9 @@ class Classes extends BaseController
    public function store()
    {
         $rules = [
-            'name' => 'required',
-            'code' => 'required|is_unique[classes.code]',
-            'status' => 'required|in_list[opened, closed]',
-            'maximum_students' => 'required|integer'
+            'id_alumnos' => 'required',
+            'id_modulos' => 'required|is_unique[modulos.code]',
+            'nota' => 'required|in_list[opened, closed]',
         ];
         $input = $this->getRequestInput($this->request);
 
@@ -49,7 +44,7 @@ class Classes extends BaseController
 
         $code = $input['code'];
 
-        $model = new ClassModel();
+        $model = new NotasModel();
         $model->save($input);
         $class = $model->where('code', $code)->first();
 
@@ -67,7 +62,7 @@ class Classes extends BaseController
    public function show($id)
    {
        try {
-           $model = new ClassModel();
+           $model = new NotasModel();
            $studentModel = new Student();
            $class = $model->findClassById($id);
            $class['students'] = $studentModel->where(['class_id' => $class['id']])->findAll(); 
@@ -95,7 +90,7 @@ class Classes extends BaseController
    public function update($id)
    {
        try {
-            $model = new ClassModel();
+            $model = new NotasModel();
             $model->findClassById($id);
 
             $input = $this->getRequestInput($this->request);
@@ -124,7 +119,7 @@ class Classes extends BaseController
    public function destroy($id)
    {
         try {
-            $model = new ClassModel();
+            $model = new NotasModel();
             $client = $model->findClassById($id);
             $model->delete($client);
 

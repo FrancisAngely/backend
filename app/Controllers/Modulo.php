@@ -3,61 +3,49 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\Contacto;
+use App\Models\Modulos;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
-class Contactos extends BaseController
+class Modulo extends BaseController
 {
     public function index()
     {
-        $model = new Contacto();
+        $model = new Modulos();
 
         return $this->getResponse(
             [
-                'message' => 'Contactos retrieved successfully',
-                'contactos' => $model->findAll()
+                'message' => 'Students retrieved successfully',
+                'modulos' => $model->findAll()
             ]
         );
     }
- public function datatable()
-    {
-       $model = new Contacto(); 
-  return $this->getResponse([
-                'message' => 'Contactos retrieved successfully',
-                'data' => $model->findAll()
-            ]);
-    }
-
 
     /**
-    * Create a new Contacto
+    * Create a new Student
     */
    public function store()
    {
         $rules = [
-         'nombre' => 'required',
-         'email' => 'required',
-         'asunto' => 'required',
-         'mensaje' => 'required',
+            'modulos' => 'required',
         ];
         $input = $this->getRequestInput($this->request);
 
-        /*if(!$this->validateRequest($input, $rules)) {
+        if(!$this->validateRequest($input, $rules)) {
             return $this
                 ->getResponse(
                     $this->validator->getErrors(),
                     ResponseInterface::HTTP_BAD_REQUEST
             );
-        }*/
+        }
 
-        $model = new Contacto();
+        $model = new Modulos();
         $model->save($input);
-         $contacto = $model->where('id', $model->getInsertID())->first();
+
         return $this->getResponse(
             [
-                'message' => 'Contacto added successfully',
-                'contacto' => $contacto
+                'message' => 'Student added successfully',
+                'class' => $model
             ]
         );
    }
@@ -68,19 +56,19 @@ class Contactos extends BaseController
     public function show($id)
     {
         try {
-            $model = new Contacto();
-            $contacto = $model->findContactoById($id);
+            $model = new Modulos();
+            $modulos = $model->findStudentById($id);
  
             return $this->getResponse(
                 [
-                    'message' => 'Contacto retrieved successfully',
-                    'contacto' => $contacto
+                    'message' => 'Student retrieved successfully',
+                    'modulos' => $modulos
                 ]
             );
         } catch (Exception $e) {
             return $this->getResponse(
                 [
-                    'message' => 'Could not find usuario for specified ID',
+                    'message' => 'Could not find student for specified ID',
                     'error' => $e->getMessage()
                 ],
                 ResponseInterface::HTTP_NOT_FOUND
@@ -88,22 +76,22 @@ class Contactos extends BaseController
         }
     }
     /**
-    * Update a Contacto
+    * Update a Student
     */
-  public function update($id)
+   public function update($id)
    {
        try {
-            $model = new Contacto();
-            //$model->findContactoById($id);
+            $model = new Modulos();
+            $model->findStudentById($id);
 
             $input = $this->getRequestInput($this->request);
             $model->update($id, $input);
-            $contacto = $model->findContactoById($id);
+            $modulos = $model->findStudentById($id);
 
             return $this->getResponse(
                 [
-                    'message' => 'Contacto updated successfully',
-                    'contacto' => $contacto
+                    'message' => 'Modulos updated successfully',
+                    'modulos' => $modulos
                 ]
             );
        } catch (Exception $exception) {
@@ -122,14 +110,14 @@ class Contactos extends BaseController
     public function destroy($id)
     {
          try {
-             $model = new Contacto();
-             $c = $model->findContactoById($id);
-             $model->delete($c);
+             $model = new Modulos();
+             $modulos = $model->findStudentById($id);
+             $model->delete($modulos);
  
              return $this
                  ->getResponse(
                      [
-                         'message' => 'Contacto deleted successfully',
+                         'message' => 'Student deleted successfully',
                      ]
                  );
          } catch (Exception $exception) {

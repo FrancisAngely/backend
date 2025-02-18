@@ -5,10 +5,10 @@ namespace App\Models;
 use CodeIgniter\Model;
 use Exception;
 
-class Contacto extends Model
+class Alumno extends Model
 {
     protected $DBGroup              = 'default';
-    protected $table                = 'contactos';
+    protected $table                = 'alumnos';
     protected $primaryKey           = 'id';
     protected $useAutoIncrement     = true;
     protected $insertID             = 0;
@@ -17,15 +17,16 @@ class Contacto extends Model
     protected $protectFields        = true;
     protected $allowedFields        = 
         [
-            "nombre","email","asunto","mensaje"
+            "nombre",
+            "apellidos"
         ];
 
     // Dates
-   // protected $useTimestamps        = false;
-    //protected $dateFormat           = 'datetime';
-    //protected $createdField         = 'created_at';
-    //protected $updatedField         = 'updated_at';
-    //protected $deletedField         = 'deleted_at';
+    protected $useTimestamps        = false;
+    protected $dateFormat           = 'datetime';
+    protected $createdField         = 'created_at';
+    protected $updatedField         = 'updated_at';
+    protected $deletedField         = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];
@@ -33,16 +34,16 @@ class Contacto extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    public function findContactoById(string $id)
+    public function findStudentById(string $id)
     {
-        $contacto = $this
+        $alumno = $this
             ->asArray()
             ->where(['id' => $id])
             ->first();
 
-        if (!$contacto) 
-            throw new Exception('Class does not exist for specified ID');
+        if (!$alumno) 
+            throw new Exception('Student does not exist for specified ID');
 
-        return $contacto;
+        return $alumno;
     }
 }

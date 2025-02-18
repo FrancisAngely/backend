@@ -36,8 +36,7 @@ class Roles extends BaseController
    public function store()
    {
         $rules = [
-            'nombre' => 'required',
-            'apellido' => 'required',
+            'role' => 'required',
         ];
         $input = $this->getRequestInput($this->request);
 

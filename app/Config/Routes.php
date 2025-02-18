@@ -48,19 +48,26 @@ $routes->setAutoRoute(true);
  */
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+
 }
 
-$routes->get('class', 'Classes::index');
-$routes->post('class', 'Classes::store');
-$routes->get('class/(:num)', 'Classes::show/$1');
-$routes->put('class/(:num)', 'Classes::update/$1');
-$routes->delete('class/(:num)', 'Classes::destroy/$1');
+$routes->get('alumnos', 'Alumnos::index');
+$routes->post('alumnos', 'Alumnos::store');
+$routes->get('alumnos/(:num)', 'Alumnos::show/$1');
+$routes->put('alumnos/(:num)', 'Alumnos::update/$1');
+$routes->delete('alumnos/(:num)', 'Alumnos::destroy/$1');
 
-$routes->get('students', 'Students::index');
-$routes->post('students', 'Students::store');
-$routes->get('students/(:num)', 'Students::show/$1');
-$routes->put('students/(:num)', 'Students::update/$1');
-$routes->delete('students/(:num)', 'Students::destroy/$1');
+$routes->get('notas', 'Notas::index');
+$routes->post('notas', 'Notas::store');
+$routes->get('notas/(:num)', 'Notas::show/$1');
+$routes->put('notas/(:num)', 'Notas::update/$1');
+$routes->delete('notas/(:num)', 'Notas::destroy/$1');
+
+$routes->get('modulo', 'Modulo::index');
+$routes->post('modulo', 'Modulo::store');
+$routes->get('modulo/(:num)', 'Modulo::show/$1');
+$routes->put('modulo/(:num)', 'Modulo::update/$1');
+$routes->delete('modulo/(:num)', 'Modulo::destroy/$1');
 
 
 $routes->get('usuarios', 'Usuarios::index');
@@ -70,37 +77,9 @@ $routes->put('usuarios/(:num)', 'Usuarios::update/$1');
 $routes->delete('usuarios/(:num)', 'Usuarios::destroy/$1');
 $routes->get('usuarios/datatable', 'Usuarios::datatable');
 
-
-$routes->get('heroes', 'Heroes::index');
-$routes->post('heroes', 'Heroes::store');
-$routes->get('heroes/(:num)', 'Heroes::show/$1');
-$routes->put('heroes/(:num)', 'Heroes::update/$1');
-$routes->delete('heroes/(:num)', 'Heroes::destroy/$1');
-
-
-$routes->get('localidades', 'Localidades::index');
-$routes->post('localidades', 'Localidades::store');
-$routes->get('localidades/(:num)', 'Localidades::show/$1');
-$routes->put('localidades/(:num)', 'Localidades::update/$1');
-$routes->delete('localidades/(:num)', 'Localidades::destroy/$1');
-
-
-
 $routes->get('roles', 'Roles::index');
 $routes->post('roles', 'Roles::store');
 $routes->get('roles/(:num)', 'Roles::show/$1');
 $routes->put('roles/(:num)', 'Roles::update/$1');
 $routes->delete('roles/(:num)', 'Roles::destroy/$1');
 
-
-$routes->get('clientes', 'Clientes::index');
-$routes->post('clientes', 'Clientes::store');
-$routes->get('clientes/(:num)', 'Clientes::show/$1');
-$routes->put('clientes/(:num)', 'Clientes::update/$1');
-$routes->delete('clientes/(:num)', 'Clientes::destroy/$1');
-
-$routes->get('contactos', 'Contactos::index');
-$routes->post('contactos', 'Contactos::store');
-$routes->get('contactos/(:num)', 'Contactos::show/$1');
-$routes->put('contactos/(:num)', 'Contactos::update/$1');
-$routes->delete('contactos/(:num)', 'Contactos::destroy/$1');

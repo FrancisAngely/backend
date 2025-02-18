@@ -17,7 +17,7 @@ class Role extends Model
     protected $protectFields        = true;
     protected $allowedFields        = 
         [
-            "name"
+            "role"
         ];
 
     // Dates

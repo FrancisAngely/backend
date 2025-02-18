@@ -20,7 +20,8 @@ class Usuario extends Model
         "nombre",
         "apellido",
         "email",
-        "id_roles"
+        "id_roles", 
+        "password"
     ];
 
     // Dates
@@ -52,9 +53,9 @@ class Usuario extends Model
 
     public function datatable()
     {
-        $model = new Contacto();
+        $model = new Usuario();
         return $this->getResponse([
-            'message' => 'Contactos retrieved successfully',
+            'message' => 'Usuario retrieved successfully',
             'data' => $model->findAll()
         ]);
     }
