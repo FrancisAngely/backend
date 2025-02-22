@@ -22,22 +22,22 @@ class Alumnos extends BaseController
     }
 
     /**
-    * Create a new Student
-    */
-   public function store()
-   {
+     * Create a new Student
+     */
+    public function store()
+    {
         $rules = [
             'nombre' => 'required',
             'apellidos' => 'required',
         ];
         $input = $this->getRequestInput($this->request);
 
-        if(!$this->validateRequest($input, $rules)) {
+        if (!$this->validateRequest($input, $rules)) {
             return $this
                 ->getResponse(
                     $this->validator->getErrors(),
                     ResponseInterface::HTTP_BAD_REQUEST
-            );
+                );
         }
 
         $model = new Alumno();
@@ -49,17 +49,17 @@ class Alumnos extends BaseController
                 'alumno' => $input
             ]
         );
-   }
+    }
 
     /**
-    * Get a single student by ID
-    */
+     * Get a single student by ID
+     */
     public function show($id)
     {
         try {
             $model = new Alumno();
             $student = $model->findStudentById($id);
- 
+
             return $this->getResponse(
                 [
                     'message' => 'Student retrieved successfully',
@@ -77,11 +77,11 @@ class Alumnos extends BaseController
         }
     }
     /**
-    * Update a Student
-    */
-   public function update($id)
-   {
-       try {
+     * Update a Student
+     */
+    public function update($id)
+    {
+        try {
             $model = new Alumno();
             $model->findStudentById($id);
 
@@ -95,39 +95,39 @@ class Alumnos extends BaseController
                     'student' => $student
                 ]
             );
-       } catch (Exception $exception) {
-           return $this->getResponse(
-               [
-                   'message' => $exception->getMessage()
-               ],
-               ResponseInterface::HTTP_NOT_FOUND
-           );
-       }
-   }
+        } catch (Exception $exception) {
+            return $this->getResponse(
+                [
+                    'message' => $exception->getMessage()
+                ],
+                ResponseInterface::HTTP_NOT_FOUND
+            );
+        }
+    }
 
-   /**
-    * Delete a Student
-    */
+    /**
+     * Delete a Student
+     */
     public function destroy($id)
     {
-         try {
-             $model = new Alumno();
-             $student = $model->findStudentById($id);
-             $model->delete($student);
- 
-             return $this
-                 ->getResponse(
-                     [
-                         'message' => 'Student deleted successfully',
-                     ]
-                 );
-         } catch (Exception $exception) {
-             return $this->getResponse(
-                 [
-                     'message' => $exception->getMessage()
-                 ],
-                 ResponseInterface::HTTP_NOT_FOUND
-             );
-         }
+        try {
+            $model = new Alumno();
+            $student = $model->findStudentById($id);
+            $model->delete($student);
+
+            return $this
+                ->getResponse(
+                    [
+                        'message' => 'Student deleted successfully',
+                    ]
+                );
+        } catch (Exception $exception) {
+            return $this->getResponse(
+                [
+                    'message' => $exception->getMessage()
+                ],
+                ResponseInterface::HTTP_NOT_FOUND
+            );
+        }
     }
 }

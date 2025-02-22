@@ -46,9 +46,10 @@ $routes->setAutoRoute(true);
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
+
+echo ENVIRONMENT;
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
-
 }
 
 $routes->get('alumnos', 'Alumnos::index');
@@ -82,4 +83,3 @@ $routes->post('roles', 'Roles::store');
 $routes->get('roles/(:num)', 'Roles::show/$1');
 $routes->put('roles/(:num)', 'Roles::update/$1');
 $routes->delete('roles/(:num)', 'Roles::destroy/$1');
-
