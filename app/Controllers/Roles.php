@@ -20,32 +20,33 @@ class Roles extends BaseController
             ]
         );
     }
- public function datatable()
+    public function datatable()
     {
-       $model = new Role(); 
-  return $this->getResponse([
-                'message' => 'Roles retrieved successfully',
-                'data' => $model->findAll()
-            ]);
+        $model = new Role();
+        return $this->getResponse([
+            'message' => 'Localidades retrieved successfully',
+            'data' => $model->findAll(),
+            'recordsTotal' => count($model->findAll()),
+            'recordsFiltered' => 5,
+        ]);
     }
 
-
     /**
-    * Create a new Role
-    */
-   public function store()
-   {
+     * Create a new Role
+     */
+    public function store()
+    {
         $rules = [
             'role' => 'required'
         ];
         $input = $this->getRequestInput($this->request);
 
-        if(!$this->validateRequest($input, $rules)) {
+        if (!$this->validateRequest($input, $rules)) {
             return $this
                 ->getResponse(
                     $this->validator->getErrors(),
                     ResponseInterface::HTTP_BAD_REQUEST
-            );
+                );
         }
 
         $model = new Role();
@@ -57,17 +58,17 @@ class Roles extends BaseController
                 'role' => $model
             ]
         );
-   }
+    }
 
     /**
-    * Get a single class by CODE
-    */
+     * Get a single class by CODE
+     */
     public function show($id)
     {
         try {
             $model = new Role();
             $usuario = $model->findRoleById($id);
- 
+
             return $this->getResponse(
                 [
                     'message' => 'Role retrieved successfully',
@@ -85,11 +86,11 @@ class Roles extends BaseController
         }
     }
     /**
-    * Update a Role
-    */
-  public function update($id)
-   {
-       try {
+     * Update a Role
+     */
+    public function update($id)
+    {
+        try {
             $model = new Role();
             $model->findRoleById($id);
 
@@ -103,39 +104,39 @@ class Roles extends BaseController
                     'usuario' => $usuario
                 ]
             );
-       } catch (Exception $exception) {
-           return $this->getResponse(
-               [
-                   'message' => $exception->getMessage()
-               ],
-               ResponseInterface::HTTP_NOT_FOUND
-           );
-       }
-   }
+        } catch (Exception $exception) {
+            return $this->getResponse(
+                [
+                    'message' => $exception->getMessage()
+                ],
+                ResponseInterface::HTTP_NOT_FOUND
+            );
+        }
+    }
 
-   /**
-    * Delete a Class
-    */
+    /**
+     * Delete a Class
+     */
     public function destroy($id)
     {
-         try {
-             $model = new Role();
-             $usuario = $model->findRoleById($id);
-             $model->delete($usuario);
- 
-             return $this
-                 ->getResponse(
-                     [
-                         'message' => 'Role deleted successfully',
-                     ]
-                 );
-         } catch (Exception $exception) {
-             return $this->getResponse(
-                 [
-                     'message' => $exception->getMessage()
-                 ],
-                 ResponseInterface::HTTP_NOT_FOUND
-             );
-         }
+        try {
+            $model = new Role();
+            $usuario = $model->findRoleById($id);
+            $model->delete($usuario);
+
+            return $this
+                ->getResponse(
+                    [
+                        'message' => 'Role deleted successfully',
+                    ]
+                );
+        } catch (Exception $exception) {
+            return $this->getResponse(
+                [
+                    'message' => $exception->getMessage()
+                ],
+                ResponseInterface::HTTP_NOT_FOUND
+            );
+        }
     }
 }
