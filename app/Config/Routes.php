@@ -47,7 +47,6 @@ $routes->setAutoRoute(true);
  * needing to reload it.
  */
 
-echo ENVIRONMENT;
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
@@ -77,6 +76,7 @@ $routes->get('usuarios/(:num)', 'Usuarios::show/$1');
 $routes->put('usuarios/(:num)', 'Usuarios::update/$1');
 $routes->delete('usuarios/(:num)', 'Usuarios::destroy/$1');
 $routes->get('usuarios/datatable', 'Usuarios::datatable');
+$routes->post('usuarios/login', 'Usuarios::login');
 
 $routes->get('roles', 'Roles::index');
 $routes->post('roles', 'Roles::store');

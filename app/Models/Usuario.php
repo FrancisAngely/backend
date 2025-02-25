@@ -15,14 +15,13 @@ class Usuario extends Model
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        =
-    [
-        "nombre",
-        "apellido",
-        "email",
-        "id_roles", 
-        "password"
-    ];
+    protected $allowedFields        = 
+        [
+            "nombre",
+            "apellido",
+            "email",
+            "id_roles",
+        ];
 
     // Dates
     protected $useTimestamps        = false;
@@ -38,7 +37,7 @@ class Usuario extends Model
     protected $cleanValidationRules = true;
 
     public function findUsuarioById($id)
-    {
+    {   
         $usuario = $this
             ->select('s.*, c.role as roles_name')
             ->from('usuarios s')
@@ -50,13 +49,21 @@ class Usuario extends Model
 
         return $usuario;
     }
+  public function findUsuarioLogin($email,$password)
+    {   
+        $usuario = $this
+            ->select('s.*, c.role as roles_name')
+            ->from('usuarios s')
+          
+          ->where(['s.email' => $email])
+          ->where(['s.password' => $password])
+            ->join('roles c', 'c.id = s.id_roles', 'left')
+            ->asArray()->first();
 
-    public function datatable()
-    {
-        $model = new Usuario();
-        return $this->getResponse([
-            'message' => 'Usuario retrieved successfully',
-            'data' => $model->findAll()
-        ]);
+        if (!$usuario) throw new Exception('Could not find usuario for specified ID');
+
+        return $usuario;
     }
+ 
+ 
 }

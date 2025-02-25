@@ -36,7 +36,7 @@ class Roles extends BaseController
    public function store()
    {
         $rules = [
-            'role' => 'required',
+            'role' => 'required'
         ];
         $input = $this->getRequestInput($this->request);
 
@@ -54,7 +54,7 @@ class Roles extends BaseController
         return $this->getResponse(
             [
                 'message' => 'Role added successfully',
-                'class' => $model
+                'role' => $model
             ]
         );
    }

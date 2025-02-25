@@ -25,21 +25,17 @@ class Usuarios extends BaseController
        $model = new Usuario(); 
   return $this->getResponse([
                 'message' => 'Usuarios retrieved successfully',
-                'data' => $model->findAll()
+                'data' => $model->findAll(),
+                 'recordsTotal'=>count($model->findAll()),
+                'recordsFiltered'=>5,
             ]);
     }
 
-
-    /**
-    * Create a new Usuario
-    */
    public function store()
    {
         $rules = [
             'nombre' => 'required',
             'apellido' => 'required',
-            'email' => 'required|valid_email',
-            'password' => 'required'
         ];
         $input = $this->getRequestInput($this->request);
 
@@ -62,9 +58,6 @@ class Usuarios extends BaseController
         );
    }
 
-    /**
-    * Get a single class by CODE
-    */
     public function show($id)
     {
         try {
@@ -75,6 +68,36 @@ class Usuarios extends BaseController
                 [
                     'message' => 'Usuario retrieved successfully',
                     'usuario' => $usuario
+                ]
+            );
+        } catch (Exception $e) {
+            return $this->getResponse(
+                [
+                    'message' => 'Could not find usuario for specified ID',
+                    'error' => $e->getMessage()
+                ],
+                ResponseInterface::HTTP_NOT_FOUND
+            );
+        }
+    }
+ 
+ public function login()
+    {
+       
+       try {
+   
+        
+        $email=$this->request->getVar('email');
+        $password=$this->request->getVar('password');
+        
+            $model = new Usuario();
+            $usuario = $model->findUsuarioLogin($email,$password);
+ 
+            return $this->getResponse(
+                [
+                    'message' => 'Usuario retrieved successfully',
+                    'usuario' => $usuario,
+                    'token' => "valido"
                 ]
             );
         } catch (Exception $e) {
