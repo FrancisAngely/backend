@@ -21,6 +21,18 @@ class Modulo extends BaseController
         );
     }
 
+    
+   public function datatable()
+   {
+       $model = new Modulos();
+       return $this->getResponse([
+           'message' => 'Modulos retrieved successfully',
+           'data' => $model->findAll(),
+           'recordsTotal' => count($model->findAll()),
+           'recordsFiltered' => 5,
+       ]);
+   }
+
     /**
     * Create a new Student
     */

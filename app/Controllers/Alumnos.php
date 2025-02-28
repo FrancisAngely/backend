@@ -21,6 +21,17 @@ class Alumnos extends BaseController
         );
     }
 
+    public function datatable()
+    {
+        $model = new Alumno();
+        return $this->getResponse([
+            'message' => 'Alumnos retrieved successfully',
+            'data' => $model->findAll(),
+            'recordsTotal' => count($model->findAll()),
+            'recordsFiltered' => 5,
+        ]);
+    }
+
     /**
      * Create a new Student
      */

@@ -24,7 +24,7 @@ class Roles extends BaseController
     {
         $model = new Role();
         return $this->getResponse([
-            'message' => 'Localidades retrieved successfully',
+            'message' => 'Roles retrieved successfully',
             'data' => $model->findAll(),
             'recordsTotal' => count($model->findAll()),
             'recordsFiltered' => 5,

@@ -22,6 +22,17 @@ class Notas extends BaseController
         );
    }
 
+   public function datatable()
+   {
+       $model = new NotasModel();
+       return $this->getResponse([
+           'message' => 'Notas retrieved successfully',
+           'data' => $model->findAll(),
+           'recordsTotal' => count($model->findAll()),
+           'recordsFiltered' => 5,
+       ]);
+   }
+
    /**
     * Create a new Class
     */
