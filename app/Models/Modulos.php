@@ -15,10 +15,10 @@ class Modulos extends Model
     protected $returnType           = 'array';
     protected $useSoftDeletes       = false;
     protected $protectFields        = true;
-    protected $allowedFields        = 
-        [
-            "modulo",
-        ];
+    protected $allowedFields        =
+    [
+        "modulo",
+    ];
 
     // Dates
     protected $useTimestamps        = false;
@@ -40,7 +40,7 @@ class Modulos extends Model
             ->where(['id' => $id])
             ->first();
 
-        if (!$modulos) 
+        if (!$modulos)
             throw new Exception('Class does not exist for specified ID');
 
         return $modulos;

@@ -67,12 +67,12 @@ class Roles extends BaseController
     {
         try {
             $model = new Role();
-            $usuario = $model->findRoleById($id);
+            $roles = $model->findRoleById($id);
 
             return $this->getResponse(
                 [
                     'message' => 'Role retrieved successfully',
-                    'usuario' => $usuario
+                    'roles' => $roles
                 ]
             );
         } catch (Exception $e) {

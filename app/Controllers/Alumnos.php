@@ -57,7 +57,7 @@ class Alumnos extends BaseController
         return $this->getResponse(
             [
                 'message' => 'Student added successfully',
-                'alumno' => $input
+                'class' => $input
             ]
         );
     }
@@ -74,7 +74,7 @@ class Alumnos extends BaseController
             return $this->getResponse(
                 [
                     'message' => 'Student retrieved successfully',
-                    'student' => $student
+                    'alumnos' => $student
                 ]
             );
         } catch (Exception $e) {

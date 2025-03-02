@@ -39,7 +39,7 @@ class Modulo extends BaseController
     public function store()
     {
         $rules = [
-            'modulos' => 'required',
+            'modulo' => 'required',
         ];
         $input = $this->getRequestInput($this->request);
 
@@ -69,18 +69,18 @@ class Modulo extends BaseController
     {
         try {
             $model = new Modulos();
-            $modulos = $model->findStudentById($id);
+            $modulos = $model->findClassById($id);
 
             return $this->getResponse(
                 [
-                    'message' => 'Student retrieved successfully',
+                    'message' => 'Modulos retrieved successfully',
                     'modulos' => $modulos
                 ]
             );
         } catch (Exception $e) {
             return $this->getResponse(
                 [
-                    'message' => 'Could not find student for specified ID',
+                    'message' => 'Could not find usuario for specified ID',
                     'error' => $e->getMessage()
                 ],
                 ResponseInterface::HTTP_NOT_FOUND
@@ -94,11 +94,11 @@ class Modulo extends BaseController
     {
         try {
             $model = new Modulos();
-            $model->findStudentById($id);
+            $model->findClassById($id);
 
             $input = $this->getRequestInput($this->request);
             $model->update($id, $input);
-            $modulos = $model->findStudentById($id);
+            $modulos = $model->findClassById($id);
 
             return $this->getResponse(
                 [
@@ -123,13 +123,13 @@ class Modulo extends BaseController
     {
         try {
             $model = new Modulos();
-            $modulos = $model->findStudentById($id);
-            $model->delete($modulos);
+            $student = $model->findClassById($id);
+            $model->delete($student);
 
             return $this
                 ->getResponse(
                     [
-                        'message' => 'Student deleted successfully',
+                        'message' => 'Modulo deleted successfully',
                     ]
                 );
         } catch (Exception $exception) {
